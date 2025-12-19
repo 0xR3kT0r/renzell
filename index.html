@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Aleia ♡</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  font-family: 'Nunito', sans-serif;
+  background: linear-gradient(120deg, #ffd6ec, #e9d7ff, #dff5ff);
+  background-size: 300% 300%;
+  animation: bgMove 12s ease infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+@keyframes bgMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Floating stickers */
+.sticker {
+  position: absolute;
+  width: 90px;
+  opacity: 0.9;
+  animation: float 8s ease-in-out infinite;
+}
+
+.sticker.kitty { top: 8%; left: 6%; }
+.sticker.kuromi { bottom: 12%; right: 8%; animation-delay: 2s; }
+.sticker.cinnamoroll { top: 12%; right: 10%; animation-delay: 4s; }
+
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-25px); }
+  100% { transform: translateY(0); }
+}
+
+/* Main card */
+.card {
+  width: 92%;
+  max-width: 380px;
+  padding: 28px;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 20px 40px rgba(255, 153, 204, 0.35);
+  text-align: center;
+  animation: cardEnter 1.2s ease;
+}
+
+@keyframes cardEnter {
+  from { transform: translateY(40px) scale(0.9); opacity: 0; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+.header-gif {
+  width: 130px;
+  margin-bottom: 12px;
+}
+
+.message-box {
+  min-height: 120px;
+  font-size: 1.05rem;
+  color: #ff4f9a;
+  line-height: 1.6;
+  transition: opacity 0.8s ease;
+}
+
+.footer {
+  margin-top: 14px;
+  font-size: 0.75rem;
+  color: #a17dc3;
+}
+</style>
+</head>
+<body>
+
+<!-- Stickers (WORKING GIFS) -->
+<img class="sticker kitty" src="https://media.tenor.com/5Z6yH7ZtK9IAAAAi/hello-kitty.gif">
+<img class="sticker kuromi" src="https://media.tenor.com/6k3Yp5r5p7kAAAAi/kuromi-sanrio.gif">
+<img class="sticker cinnamoroll" src="https://media.tenor.com/WKpZC6kzF7QAAAAi/cinnamoroll.gif">
+
+<div class="card">
+  <img class="header-gif" src="https://media.tenor.com/2roX3uxXgqIAAAAi/hello-kitty-love.gif">
+  <div class="message-box" id="message"></div>
+  <div class="footer">made by renzell</div>
+</div>
+
+<script>
+const messages = [
+  "Hi Aleia ",
+  "I want to say this gently and honestly.",
+  "I liked you before, dati…",
+  "but over time, my feelings slowly changed.",
+  "I didn’t know before that you liked me too.",
+  "Lately ko lang nalaman, and I understand now.",
+  "Right now, I don’t feel the same way anymore.",
+  "I already have another crush.",
+  "And yes… I already confessed to that person.",
+  "This message isn’t to hurt you.",
+  "You did nothing wrong ",
+  "I just wanted to be honest and kind.",
+  "yun lang, nag code pa ako para lang dito"
+];
+
+const msgEl = document.getElementById("message");
+let msgIndex = 0;
+let charIndex = 0;
+
+function typeMessage() {
+  if (charIndex < messages[msgIndex].length) {
+    msgEl.textContent += messages[msgIndex].charAt(charIndex);
+    charIndex++;
+    setTimeout(typeMessage, 45);
+  } else {
+    setTimeout(() => {
+      msgEl.style.opacity = 0;
+      setTimeout(() => {
+        msgIndex = (msgIndex + 1) % messages.length;
+        msgEl.textContent = "";
+        charIndex = 0;
+        msgEl.style.opacity = 1;
+        typeMessage();
+      }, 600);
+    }, 1800);
+  }
+}
+
+typeMessage();
+</script>
+
+</body>
+</html>
